@@ -19,11 +19,14 @@ void ArrayPriorityQueue::changePriority(string value, int newPriority) {
     // TODO: implement
 }
 
-void ArrayPriorityQueue::clear() {
-    // TODO: implement
+void ArrayPriorityQueue::clear() { // complexity - O(n)
+    for(int i=0; i<pqSize; i++){
+        array[i] = nullptr;
+    }
+    pqSize = 0;
 }
 
-string ArrayPriorityQueue::dequeue() {
+string ArrayPriorityQueue::dequeue() { // complexity - O(n)
     int index = getHigherEntryIndex();
     if(index == -1) throw ("string exception - empty queue");
     PQEntry* desiredEntry = array[index];
@@ -33,7 +36,7 @@ string ArrayPriorityQueue::dequeue() {
     return desiredEntry->value;
 }
 
-int ArrayPriorityQueue::getHigherEntryIndex() const{
+int ArrayPriorityQueue::getHigherEntryIndex() const{ // complexity - O(n)
     int lowestPriority = 10000;
     int index = -1;
     for(int i=0 ; i< pqSize; i++){
@@ -45,34 +48,34 @@ int ArrayPriorityQueue::getHigherEntryIndex() const{
     return index;
 }
 
-void ArrayPriorityQueue::enqueue(string value, int priority) {
+void ArrayPriorityQueue::enqueue(string value, int priority) { // complexity - O(1)
     PQEntry* newEntry = new PQEntry(value, priority);
     array[pqSize] = newEntry;
     pqSize++;
 }
 
-bool ArrayPriorityQueue::isEmpty() const {
+bool ArrayPriorityQueue::isEmpty() const { // complexity - O(1)
     return (pqSize == 0);
 }
 
-string ArrayPriorityQueue::peek() const {
+string ArrayPriorityQueue::peek() const { // complexity - O(n)
     int index = getHigherEntryIndex();
     if(index == -1) throw ("string exception - empty queue");
     return array[index]->value;
 }
 
-int ArrayPriorityQueue::peekPriority() const {
+int ArrayPriorityQueue::peekPriority() const { // complexity - O(n)
     int index = getHigherEntryIndex();
     if(index == -1) throw ("string exception - empty queue");
     return array[index]->priority;
 }
 
-int ArrayPriorityQueue::size() const {
+int ArrayPriorityQueue::size() const { // complexity - O(n)
     return pqSize;
 }
 
 //{"t":2 , "b":4, "m":5, "q":5, "x":5, "a":8}
-string ArrayPriorityQueue::toString() const{
+string ArrayPriorityQueue::toString() const{ // complexity - O(n)
     string out = "{";
     for(int i=0; i<pqSize; i++){
         PQEntry* cur = array[i];
