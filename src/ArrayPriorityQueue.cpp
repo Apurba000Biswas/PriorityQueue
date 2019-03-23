@@ -12,19 +12,15 @@ ArrayPriorityQueue::ArrayPriorityQueue() {
 }
 
 ArrayPriorityQueue::~ArrayPriorityQueue() {
-    // TODO: implement
-    //delete[] array;
-
+    delete[] array[10];
 }
 
 void ArrayPriorityQueue::changePriority(string value, int newPriority) {
     // TODO: implement
-
 }
 
 void ArrayPriorityQueue::clear() {
     // TODO: implement
-
 }
 
 string ArrayPriorityQueue::dequeue() {
