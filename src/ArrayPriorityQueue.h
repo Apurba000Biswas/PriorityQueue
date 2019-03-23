@@ -26,9 +26,11 @@ public:
     int peekPriority() const;
     int size() const;
     friend ostream& operator <<(ostream& out, const ArrayPriorityQueue& queue);
-
+    string toString() const;
 private:
     // TODO: add any other member functions/variables necessary
+    PQEntry* array[10];
+    int pqSize;
 
 };
 
