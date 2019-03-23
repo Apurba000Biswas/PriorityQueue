@@ -1,8 +1,4 @@
-// This is a .cpp file you will edit and turn in.
-// We have provided a skeleton for you,
-// but you must finish it as described in the spec.
-// Also remove these comments here and add your own.
-// TODO: remove this comment header
+
 
 #include "ArrayPriorityQueue.h"
 
@@ -15,8 +11,22 @@ ArrayPriorityQueue::~ArrayPriorityQueue() {
     delete[] array[10];
 }
 
-void ArrayPriorityQueue::changePriority(string value, int newPriority) {
-    // TODO: implement
+void ArrayPriorityQueue::changePriority(string value, int newPriority) { // complexity - O(n)
+    int index = getIndex(value);
+    PQEntry* entry = array[index];
+    if(index == -1 || entry->priority < newPriority) throw ("string exception");
+    entry->priority = newPriority;
+}
+
+int ArrayPriorityQueue::getIndex(string value) const {
+    int index = -1;
+    for(int i=0; i<pqSize; i++){
+        if(array[i]->value == value){
+            index = i;
+            break;
+        }
+    }
+    return index;
 }
 
 void ArrayPriorityQueue::clear() { // complexity - O(n)

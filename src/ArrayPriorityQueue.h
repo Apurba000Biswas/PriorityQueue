@@ -32,7 +32,7 @@ private:
     PQEntry* array[10];
     int pqSize;
     int getHigherEntryIndex() const;
-
+    int getIndex(string value) const;
 };
 
 #endif
