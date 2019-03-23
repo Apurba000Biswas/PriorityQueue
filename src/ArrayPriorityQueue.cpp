@@ -7,13 +7,13 @@
 #include "ArrayPriorityQueue.h"
 
 ArrayPriorityQueue::ArrayPriorityQueue() {
-    // TODO: implement
     array[10] = new PQEntry[10];
     pqSize = 0;
 }
 
 ArrayPriorityQueue::~ArrayPriorityQueue() {
     // TODO: implement
+    //delete[] array;
 
 }
 
@@ -28,25 +28,28 @@ void ArrayPriorityQueue::clear() {
 }
 
 string ArrayPriorityQueue::dequeue() {
-    PQEntry* desiredEntry = nullptr;
-    int lowestPriority = 10000;
-    int index = 0;
-    for(int i=0 ; i< pqSize; i++){
-        if(lowestPriority > array[i]->priority){
-            desiredEntry = array[i];
-            lowestPriority = array[i]->priority;
-            index = i;
-        }
-    }
-    if(desiredEntry == nullptr) throw ("string exception");
+    int index = getHigherEntryIndex();
+    if(index == -1) throw ("string exception - empty queue");
+    PQEntry* desiredEntry = array[index];
     array[index] = array[pqSize-1]; // move the last value
-    array[pqSize-1] = nullptr;
+    array[pqSize-1] = nullptr; // cut the last value
     pqSize--;
     return desiredEntry->value;
 }
 
+int ArrayPriorityQueue::getHigherEntryIndex() const{
+    int lowestPriority = 10000;
+    int index = -1;
+    for(int i=0 ; i< pqSize; i++){
+        if(lowestPriority > array[i]->priority){
+            lowestPriority = array[i]->priority;
+            index = i;
+        }
+    }
+    return index;
+}
+
 void ArrayPriorityQueue::enqueue(string value, int priority) {
-    // TODO: implement
     PQEntry* newEntry = new PQEntry(value, priority);
     array[pqSize] = newEntry;
     pqSize++;
@@ -57,13 +60,15 @@ bool ArrayPriorityQueue::isEmpty() const {
 }
 
 string ArrayPriorityQueue::peek() const {
-    // TODO: implement
-    return "";   // remove this
+    int index = getHigherEntryIndex();
+    if(index == -1) throw ("string exception - empty queue");
+    return array[index]->value;
 }
 
 int ArrayPriorityQueue::peekPriority() const {
-    // TODO: implement
-    return 0;   // remove this
+    int index = getHigherEntryIndex();
+    if(index == -1) throw ("string exception - empty queue");
+    return array[index]->priority;
 }
 
 int ArrayPriorityQueue::size() const {
