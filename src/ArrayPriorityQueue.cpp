@@ -28,8 +28,21 @@ void ArrayPriorityQueue::clear() {
 }
 
 string ArrayPriorityQueue::dequeue() {
-    // TODO: implement
-    return "";   // remove this
+    PQEntry* desiredEntry = nullptr;
+    int lowestPriority = 10000;
+    int index = 0;
+    for(int i=0 ; i< pqSize; i++){
+        if(lowestPriority > array[i]->priority){
+            desiredEntry = array[i];
+            lowestPriority = array[i]->priority;
+            index = i;
+        }
+    }
+    if(desiredEntry == nullptr) throw ("string exception");
+    array[index] = array[pqSize-1]; // move the last value
+    array[pqSize-1] = nullptr;
+    pqSize--;
+    return desiredEntry->value;
 }
 
 void ArrayPriorityQueue::enqueue(string value, int priority) {
@@ -60,14 +73,11 @@ int ArrayPriorityQueue::size() const {
 //{"t":2 , "b":4, "m":5, "q":5, "x":5, "a":8}
 string ArrayPriorityQueue::toString() const{
     string out = "{";
-    if(pqSize != 0){
-        int i=0;
-        for(i=0; i<pqSize; i++){
-            PQEntry* cur = array[i];
-            out = out + "\"" + cur->value + "\":" + to_string(cur->priority);
-            if( i != pqSize-1){
-                out = out + ", ";
-            }
+    for(int i=0; i<pqSize; i++){
+        PQEntry* cur = array[i];
+        out = out + "\"" + cur->value + "\":" + to_string(cur->priority);
+        if( i != pqSize-1){
+            out = out + ", ";
         }
     }
     out = out + "}";
@@ -75,7 +85,6 @@ string ArrayPriorityQueue::toString() const{
 }
 
 ostream& operator<<(ostream& out, const ArrayPriorityQueue& queue) {
-    // TODO: implement
     out << queue.toString();
     return out;
 }
