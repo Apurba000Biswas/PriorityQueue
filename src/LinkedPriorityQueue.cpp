@@ -1,37 +1,53 @@
-// This is a .cpp file you will edit and turn in.
-// We have provided a skeleton for you,
-// but you must finish it as described in the spec.
-// Also remove these comments here and add your own.
-// TODO: remove this comment header
 
 #include "LinkedPriorityQueue.h"
 
 LinkedPriorityQueue::LinkedPriorityQueue() {
-    // TODO: implement
     front = nullptr;
 }
 
 LinkedPriorityQueue::~LinkedPriorityQueue() {
-    // TODO: implement
-
+    if(front != nullptr)removeAllNodes();
+    delete front;
 }
 
 void LinkedPriorityQueue::changePriority(string value, int newPriority) {
-    // TODO: implement
-
+    if(front == nullptr) throw ("Priority Queue is empty");
+    ListNode* current = front;
+    ListNode* previous = nullptr;
+    while (true) {
+        if(current->value == value){
+            cout << "Ok Found" << endl;
+            if(current->priority < newPriority) throw ("new priority cannot be greater than old priority");
+            if(previous != nullptr){
+                previous->next = current->next;
+            }else{
+                front = current->next;
+            }
+            enqueue(value, newPriority);
+            delete current;
+            break;
+        }
+        previous = current;
+        if(current->next == nullptr) throw ("The given value is not found in this priority queue");
+        current = current->next;
+    }
 }
 
 void LinkedPriorityQueue::clear() {
     if(front != nullptr){
-        ListNode* current = front;
-        while(current->next != nullptr){
-            ListNode* toClearNode = current;
-            current = current->next;
-            delete toClearNode;
-        }
-        delete current;
+        removeAllNodes();
         front = nullptr;
     }
+}
+
+void LinkedPriorityQueue::removeAllNodes(){
+    ListNode* current = front;
+    while(current->next != nullptr){
+        ListNode* toClearNode = current;
+        current = current->next;
+        delete toClearNode;
+    }
+    delete current;
 }
 
 string LinkedPriorityQueue::dequeue() {
