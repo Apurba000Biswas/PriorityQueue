@@ -30,11 +30,10 @@ public:
     friend ostream& operator <<(ostream& out, const HeapPriorityQueue& queue);
 
 private:
-    // TODO: add any other member functions/variables necessary
     PQEntry* array[10];
     int length;
     string toString() const;
-    void bubbleUp();
+    void bubbleUp(int index);
     void bubbleDown();
     int getSmallestChildIndex(int parentIndex) const;
 };

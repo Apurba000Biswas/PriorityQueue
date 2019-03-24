@@ -8,7 +8,9 @@ ArrayPriorityQueue::ArrayPriorityQueue() {
 }
 
 ArrayPriorityQueue::~ArrayPriorityQueue() {
-    delete[] array[10];
+    for(int i=0; i<pqSize; i++){
+        delete array[i];
+    }
 }
 
 void ArrayPriorityQueue::changePriority(string value, int newPriority) { // complexity - O(n)

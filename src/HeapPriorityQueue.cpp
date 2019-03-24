@@ -13,12 +13,25 @@ HeapPriorityQueue::HeapPriorityQueue() {
 }
 
 HeapPriorityQueue::~HeapPriorityQueue() {
-    delete [] array[10];
+    for(int i=1; i<=length; i++){
+        delete array[i];
+    }
 }
 
 void HeapPriorityQueue::changePriority(string value, int newPriority) {
-    // TODO: implement
+    int index = -1;
+    for(int i=1; i<=length; i++){
+        if(value == array[i]->value) {
+            index = i;
+            break;
+        }
+    }
+    if(index == -1) throw ("Error: The given value is not found in this priority queue");
+    if(newPriority > array[index]->priority) throw ("Error: new priority cannot be greater than old priority");
 
+    PQEntry* updatedEntry = new PQEntry(value, newPriority);
+    array[index] = updatedEntry;
+    bubbleUp(index);
 }
 
 void HeapPriorityQueue::clear() {
@@ -76,13 +89,13 @@ void HeapPriorityQueue::enqueue(string value, int priority) {
     PQEntry* entry = new PQEntry(value, priority);
     length++;
     array[length] = entry;
-    if(length > 1) bubbleUp();
+    if(length > 1) bubbleUp(length);
 }
 
-// this method will always bubble up the last element with its parent index until its in order
-void HeapPriorityQueue::bubbleUp(){
-    int childIndex = length;
-    int parentIndex = length/2;
+// this method will always bubble up the given index with its parent index until its in order
+void HeapPriorityQueue::bubbleUp(int index){
+    int childIndex = index;
+    int parentIndex = index/2;
 
     PQEntry parentData = *array[parentIndex];
     PQEntry ChildData = *array[childIndex];
