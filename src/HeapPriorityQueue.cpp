@@ -13,8 +13,7 @@ HeapPriorityQueue::HeapPriorityQueue() {
 }
 
 HeapPriorityQueue::~HeapPriorityQueue() {
-    // TODO: implement
-
+    delete [] array[10];
 }
 
 void HeapPriorityQueue::changePriority(string value, int newPriority) {
@@ -23,8 +22,10 @@ void HeapPriorityQueue::changePriority(string value, int newPriority) {
 }
 
 void HeapPriorityQueue::clear() {
-    // TODO: implement
-
+    for(int i=1; i<length; i++){
+        array[i] = nullptr;
+    }
+    length = 0;
 }
 
 string HeapPriorityQueue::dequeue() {
@@ -36,9 +37,7 @@ void HeapPriorityQueue::enqueue(string value, int priority) {
     PQEntry* entry = new PQEntry(value, priority);
     length++;
     array[length] = entry;
-    if(length > 1){
-        bubbleUp();
-    }
+    if(length > 1) bubbleUp();
 }
 
 // this method will always bubble the last element until its in order
@@ -66,23 +65,21 @@ void HeapPriorityQueue::bubbleUp(){
 }
 
 bool HeapPriorityQueue::isEmpty() const {
-    // TODO: implement
-    return false;   // remove this
+    return length == 0;
 }
 
 string HeapPriorityQueue::peek() const {
-    // TODO: implement
-    return "";   // remove this
+    if(length == 0) throw ("Error: Priority Queue is empty");
+    return array[1]->value;
 }
 
 int HeapPriorityQueue::peekPriority() const {
-    // TODO: implement
-    return 0;   // remove this
+    if(length == 0) throw ("Error: Priority Queue is empty");
+    return array[1]->priority;
 }
 
 int HeapPriorityQueue::size() const {
-    // TODO: implement
-    return 0;   // remove this
+    return length;
 }
 
 //{"t":2 , "b":4, "m":5, "q":5, "x":5, "a":8}
