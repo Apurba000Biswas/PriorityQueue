@@ -14,7 +14,7 @@ ArrayPriorityQueue::~ArrayPriorityQueue() {
 void ArrayPriorityQueue::changePriority(string value, int newPriority) { // complexity - O(n)
     int index = getIndex(value);
     PQEntry* entry = array[index];
-    if(index == -1 || entry->priority < newPriority) throw ("string exception");
+    if(index == -1 || entry->priority < newPriority) throw ("Priority Queue is empty");
     entry->priority = newPriority;
 }
 
@@ -38,7 +38,7 @@ void ArrayPriorityQueue::clear() { // complexity - O(n)
 
 string ArrayPriorityQueue::dequeue() { // complexity - O(n)
     int index = getHigherEntryIndex();
-    if(index == -1) throw ("string exception - empty queue");
+    if(index == -1) throw ("Priority Queue is empty");
     PQEntry* desiredEntry = array[index];
     array[index] = array[pqSize-1]; // move the last value
     array[pqSize-1] = nullptr; // cut the last value
@@ -70,13 +70,13 @@ bool ArrayPriorityQueue::isEmpty() const { // complexity - O(1)
 
 string ArrayPriorityQueue::peek() const { // complexity - O(n)
     int index = getHigherEntryIndex();
-    if(index == -1) throw ("string exception - empty queue");
+    if(index == -1) throw ("Priority Queue is empty");
     return array[index]->value;
 }
 
 int ArrayPriorityQueue::peekPriority() const { // complexity - O(n)
     int index = getHigherEntryIndex();
-    if(index == -1) throw ("string exception - empty queue");
+    if(index == -1) throw ("Priority Queue is empty");
     return array[index]->priority;
 }
 

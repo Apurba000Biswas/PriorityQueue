@@ -27,7 +27,7 @@ void LinkedPriorityQueue::clear() {
 }
 
 string LinkedPriorityQueue::dequeue() {
-    if(front == nullptr) throw ("string exception");
+    if(front == nullptr) throw ("Priority Queue is empty");
     ListNode* data = front;
     front = front->next;
     string value = data->value;
@@ -71,18 +71,25 @@ bool LinkedPriorityQueue::isEmpty() const {
 }
 
 string LinkedPriorityQueue::peek() const {
-    // TODO: implement
-    return "";   // remove this
+    if(front == nullptr) throw ("Priority Queue is empty");
+    return front->value;
 }
 
 int LinkedPriorityQueue::peekPriority() const {
-    // TODO: implement
-    return 0;   // remove this
+    if(front == nullptr) throw ("Priority Queue is empty");
+    return front->priority;
 }
 
 int LinkedPriorityQueue::size() const {
-    // TODO: implement
-    return 0;   // remove this
+    if(front == nullptr) return 0;
+    ListNode* current = front;
+    int size = 0;
+    while (current->next != nullptr) {
+        size ++;
+        current = current->next;
+    }
+    size ++;
+    return size;
 }
 
 // {"t":2 , "b":4, "m":5, "q":5, "x":5, "a":8}
