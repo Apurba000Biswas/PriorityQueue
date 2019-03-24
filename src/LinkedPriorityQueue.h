@@ -21,14 +21,14 @@ class LinkedPriorityQueue {
 public:
     LinkedPriorityQueue();
     ~LinkedPriorityQueue();
-    void changePriority(string value, int newPriority);
-    void clear();
-    string dequeue();
-    void enqueue(string value, int priority);
-    bool isEmpty() const;
-    string peek() const;
-    int peekPriority() const;
-    int size() const;
+    void changePriority(string value, int newPriority); // O(n2)
+    void clear(); // O(n)
+    string dequeue(); // O(1)
+    void enqueue(string value, int priority); // O(n)
+    bool isEmpty() const;// O(1)
+    string peek() const; // O(1)
+    int peekPriority() const; //O(1)
+    int size() const; // O(n)
     friend ostream& operator <<(ostream& out, const LinkedPriorityQueue& queue);
 
 private:

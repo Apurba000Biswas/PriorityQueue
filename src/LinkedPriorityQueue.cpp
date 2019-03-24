@@ -16,7 +16,6 @@ void LinkedPriorityQueue::changePriority(string value, int newPriority) {
     ListNode* previous = nullptr;
     while (true) {
         if(current->value == value){
-            cout << "Ok Found" << endl;
             if(current->priority < newPriority) throw ("new priority cannot be greater than old priority");
             if(previous != nullptr){
                 previous->next = current->next;
