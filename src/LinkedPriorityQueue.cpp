@@ -8,7 +8,7 @@
 
 LinkedPriorityQueue::LinkedPriorityQueue() {
     // TODO: implement
-
+    front = nullptr;
 }
 
 LinkedPriorityQueue::~LinkedPriorityQueue() {
@@ -32,13 +32,38 @@ string LinkedPriorityQueue::dequeue() {
 }
 
 void LinkedPriorityQueue::enqueue(string value, int priority) {
-    // TODO: implement
+    if(isEmpty()){
+        front = new ListNode(value, priority, nullptr);
+    }else{
+        ListNode* current = front;
+        ListNode* previuos = nullptr;
+        ListNode* newNode = new ListNode(value, priority, nullptr);
 
+        while (*current <= *newNode) {
+            if(current->next == nullptr){
+                break;
+            }
+            previuos = current;
+            current = current->next;
+        }
+        if(*newNode < *current){
+            // insert it before current
+            newNode->next = current;
+            if(previuos != nullptr){
+                previuos->next = newNode;
+            }else{
+                front = newNode;
+            }
+         } else {
+            // insert it after current
+            newNode->next = current->next;
+            current->next = newNode;
+         }
+    }
 }
 
 bool LinkedPriorityQueue::isEmpty() const {
-    // TODO: implement
-    return false;   // remove this
+    return (front == nullptr);
 }
 
 string LinkedPriorityQueue::peek() const {
@@ -56,7 +81,20 @@ int LinkedPriorityQueue::size() const {
     return 0;   // remove this
 }
 
+// {"t":2 , "b":4, "m":5, "q":5, "x":5, "a":8}
+string LinkedPriorityQueue::toString() const {
+    ListNode* current = front;
+    string out = "{";
+    while (true) {
+        out = out + "\"" + current->value + "\":" + to_string(current->priority);
+        if(current->next == nullptr)break;
+        out = out + ", ";
+        current = current->next;
+    }
+    return out + "}";
+}
+
 ostream& operator<<(ostream& out, const LinkedPriorityQueue& queue) {
-    // TODO: implement
+    out << queue.toString();
     return out;
 }

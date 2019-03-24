@@ -1,8 +1,3 @@
-// This is a .h file you will edit and turn in.
-// We have provided a skeleton for you,
-// but you must finish it as described in the spec.
-// Also remove these comments here and add your own.
-// TODO: remove this comment header
 
 #ifndef _arraypriorityqueue_h
 #define _arraypriorityqueue_h
@@ -12,7 +7,6 @@
 #include "PQEntry.h"
 using namespace std;
 
-// TODO: comment
 class ArrayPriorityQueue {
 public:
     ArrayPriorityQueue();
@@ -28,7 +22,6 @@ public:
     friend ostream& operator <<(ostream& out, const ArrayPriorityQueue& queue);
     string toString() const;
 private:
-    // TODO: add any other member functions/variables necessary
     PQEntry* array[10];
     int pqSize;
     int getHigherEntryIndex() const;

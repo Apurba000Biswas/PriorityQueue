@@ -33,7 +33,8 @@ public:
 
 private:
     // TODO: add any other member functions/variables necessary
-
+    ListNode* front;
+    string toString() const;
 };
 
 #endif
