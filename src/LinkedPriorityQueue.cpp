@@ -67,9 +67,7 @@ void LinkedPriorityQueue::enqueue(string value, int priority) {
         ListNode* newNode = new ListNode(value, priority, nullptr);
 
         while (*current <= *newNode) {
-            if(current->next == nullptr){
-                break;
-            }
+            if(current->next == nullptr) break;
             previuos = current;
             current = current->next;
         }
