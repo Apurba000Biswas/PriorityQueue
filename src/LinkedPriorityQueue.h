@@ -1,8 +1,4 @@
-// This is a .h file you will edit and turn in.
-// We have provided a skeleton for you,
-// but you must finish it as described in the spec.
-// Also remove these comments here and add your own.
-// TODO: remove this comment header
+
 
 #ifndef _linkedpriorityqueue_h
 #define _linkedpriorityqueue_h
@@ -14,9 +10,6 @@
 #include "PQEntry.h"
 using namespace std;
 
-/*
- * For documentation of each member, see VectorPriorityQueue.h.
- */
 class LinkedPriorityQueue {
 public:
     LinkedPriorityQueue();
@@ -32,7 +25,6 @@ public:
     friend ostream& operator <<(ostream& out, const LinkedPriorityQueue& queue);
 
 private:
-    // TODO: add any other member functions/variables necessary
     ListNode* front;
     string toString() const;
     void removeAllNodes();
