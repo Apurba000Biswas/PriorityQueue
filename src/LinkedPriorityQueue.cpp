@@ -27,8 +27,12 @@ void LinkedPriorityQueue::clear() {
 }
 
 string LinkedPriorityQueue::dequeue() {
-    // TODO: implement
-    return "";   // remove this
+    if(front == nullptr) throw ("string exception");
+    ListNode* data = front;
+    front = front->next;
+    string value = data->value;
+    delete data;
+    return value;
 }
 
 void LinkedPriorityQueue::enqueue(string value, int priority) {
@@ -85,7 +89,7 @@ int LinkedPriorityQueue::size() const {
 string LinkedPriorityQueue::toString() const {
     ListNode* current = front;
     string out = "{";
-    while (true) {
+    while (front != nullptr) {
         out = out + "\"" + current->value + "\":" + to_string(current->priority);
         if(current->next == nullptr)break;
         out = out + ", ";
