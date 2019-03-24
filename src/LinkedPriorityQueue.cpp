@@ -22,8 +22,16 @@ void LinkedPriorityQueue::changePriority(string value, int newPriority) {
 }
 
 void LinkedPriorityQueue::clear() {
-    // TODO: implement
-
+    if(front != nullptr){
+        ListNode* current = front;
+        while(current->next != nullptr){
+            ListNode* toClearNode = current;
+            current = current->next;
+            delete toClearNode;
+        }
+        delete current;
+        front = nullptr;
+    }
 }
 
 string LinkedPriorityQueue::dequeue() {
