@@ -31,7 +31,10 @@ public:
 
 private:
     // TODO: add any other member functions/variables necessary
-
+    PQEntry* array[10];
+    int length;
+    string toString() const;
+    void bubbleUp();
 };
 
 #endif
