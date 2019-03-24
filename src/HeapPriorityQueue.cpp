@@ -31,7 +31,7 @@ void HeapPriorityQueue::changePriority(string value, int newPriority) {
 
     PQEntry* updatedEntry = new PQEntry(value, newPriority);
     array[index] = updatedEntry;
-    bubbleUp(index);
+    if(index != 1)bubbleUp(index);
 }
 
 void HeapPriorityQueue::clear() {
@@ -93,6 +93,7 @@ void HeapPriorityQueue::enqueue(string value, int priority) {
 }
 
 // this method will always bubble up the given index with its parent index until its in order
+// dose not expect index <= 1;
 void HeapPriorityQueue::bubbleUp(int index){
     int childIndex = index;
     int parentIndex = index/2;
