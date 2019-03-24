@@ -29,9 +29,48 @@ void HeapPriorityQueue::clear() {
 }
 
 string HeapPriorityQueue::dequeue() {
-    // TODO: implement
-    return "";   // remove this
+    if(length == 0) throw ("Error: Priority Queue is empty");
+    PQEntry* front = array[1];
+    array[1] = array[length];
+    array[length] = nullptr;
+    length--;
+    if(length > 1) bubbleDown();
+    return front->value;
 }
+
+// this method will always bubble down the first element with its child index until its in order
+void HeapPriorityQueue::bubbleDown(){
+    int parentIndex = 1;
+    int smallestChildIndex = getSmallestChildIndex(parentIndex);
+    while (smallestChildIndex != -1) {
+        PQEntry parent = *array[parentIndex];
+        PQEntry smallChild = *array[smallestChildIndex];
+        if(parent < smallChild) break;
+
+        //swap parentIndex with smallestChildIndex
+        PQEntry* temp = array[parentIndex];
+        array[parentIndex] = array[smallestChildIndex];
+        array[smallestChildIndex] = temp;
+
+        // update index
+        parentIndex = smallestChildIndex;
+        smallestChildIndex = getSmallestChildIndex(parentIndex);
+    }
+}
+
+int HeapPriorityQueue::getSmallestChildIndex(int parentIndex) const {
+    int index = -1;
+    int childIndex = parentIndex*2;
+    if(childIndex > length) return index;
+    if(childIndex+1 > length) return childIndex;
+
+    // or check which child is small
+    PQEntry child1 = *array[childIndex];
+    PQEntry child2 = *array[childIndex+1];
+    index = (child1 <= child2) ? childIndex : childIndex+1 ;
+    return index;
+}
+
 
 void HeapPriorityQueue::enqueue(string value, int priority) {
     PQEntry* entry = new PQEntry(value, priority);
@@ -40,7 +79,7 @@ void HeapPriorityQueue::enqueue(string value, int priority) {
     if(length > 1) bubbleUp();
 }
 
-// this method will always bubble the last element until its in order
+// this method will always bubble up the last element with its parent index until its in order
 void HeapPriorityQueue::bubbleUp(){
     int childIndex = length;
     int parentIndex = length/2;

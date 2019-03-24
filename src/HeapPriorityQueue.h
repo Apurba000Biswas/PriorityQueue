@@ -35,6 +35,8 @@ private:
     int length;
     string toString() const;
     void bubbleUp();
+    void bubbleDown();
+    int getSmallestChildIndex(int parentIndex) const;
 };
 
 #endif
